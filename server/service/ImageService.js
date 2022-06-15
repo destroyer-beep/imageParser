@@ -23,13 +23,12 @@ class ImageService {
         return data;
     }
 
-    async imgParser(data) {
-        let file = fs.readFileSync('./uploads/' + data.filename);
-        const buffer = await Buffer.from(file).toString('base64');
+    async imgParser(filename) {
+        let fileRead = fs.readFileSync('./image/' + filename + '.jpg');
+        const buffer = await Buffer.from(fileRead).toString('base64');
         const {results} = await this.sendFile(buffer);
         const resultsJson = await JSON.stringify(results[0], null, 2);
-        fs.writeFileSync('res.json', resultsJson, 'utf-8');
-        return resultsJson;
+        fs.writeFileSync(`./text/${filename}.json`, resultsJson, 'utf-8');
     }
 }
 

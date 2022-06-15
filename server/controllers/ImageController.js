@@ -1,12 +1,11 @@
 import ImageService from "../service/ImageService.js";
 
 class ImageController {
-    async imgParser(req, res) {
+    async imgParser(filename) {
         try {
-            const imageText = await ImageService.imgParser(req.file);
-            res.end(imageText);
+            await ImageService.imgParser(filename);
         } catch (e) {
-            res.status(500).json(e);
+            console.log('Service error');
         }
     }
 }
